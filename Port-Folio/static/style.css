@@ -1,229 +1,278 @@
+/* --- BASE VARIABLES (Dark Neumorphism) --- */
 :root {
-    --bg-color: #1a1e29;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --gradient-start: #3b82f6;
-    --gradient-end: #8b5cf6;
-    /* 3D shadow colors */
-    --shadow-dark: #12151d;
-    --shadow-light: #222735;
+    --bg-color: #1a1b1e;
+    --text-primary: #e0e6ed;
+    --text-secondary: #8b949e;
+    --gradient-start: #00f2fe;
+    --gradient-end: #4facfe;
+    --shadow-light: #25272b;
+    --shadow-dark: #0f1011;
 }
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
 }
 
 body {
     background-color: var(--bg-color);
-    color: var(--text-main);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', system-ui, sans-serif;
     line-height: 1.6;
+    cursor: none; /* Custom JS cursor */
     overflow-x: hidden;
 }
 
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 2rem 20px;
-}
-
-.text-center { text-align: center; }
-
-header {
-    padding: 5rem 0 3rem;
-    margin-bottom: 2rem;
-}
-
-.header-content {
+/* --- HERO SECTION --- */
+.hero {
+    min-height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* 3D Avatar (Updated Size & Fit) */
-.avatar-container-3d {
-    width: 220px;  /* Size bada kar diya gaya hai */
-    height: 220px; 
-    border-radius: 50%;
-    margin-bottom: 2rem;
-    padding: 8px; /* 3D rim ko thoda aur define karne ke liye padding badhayi hai */
-    background: var(--bg-color);
-    box-shadow: 12px 12px 24px var(--shadow-dark), 
-               -12px -12px 24px var(--shadow-light);
-    display: flex; /* Image ko perfectly center karne ke liye */
-    align-items: center;
     justify-content: center;
+    text-align: center;
+    padding: 2rem;
 }
 
-.avatar {
+.profile-container {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 1.5rem;
+    border-radius: 50%;
+    /* Swapped padding for border so the image can be clipped cleanly */
+    border: 5px solid var(--bg-color);
+    overflow: hidden; 
+    background: var(--bg-color);
+    box-shadow: 8px 8px 16px var(--shadow-dark), 
+               -8px -8px 16px var(--shadow-light);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+    will-change: transform, box-shadow;
+    z-index: 10;
+}
+
+/* The neon glow triggers on hover */
+.profile-container:hover {
+    box-shadow: 0 0 20px var(--gradient-start), 
+                0 0 40px var(--gradient-end),
+                inset 0 0 10px var(--bg-color);
+}
+
+.hero-img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    object-fit: cover; /* Image ko stretch hone se rokta hai */
-    object-position: center middle; /* Face ko frame ke center mein rakhta hai */
-    border: 4px solid rgba(255, 255, 255, 0.08);
-    transition: transform 0.3s ease; /* Hover effect ke liye smooth transition */
-    transform: scale(1.2);
+    object-fit: cover;
+    /* Increase this number to zoom in more (e.g., 1.5, 2.0) */
+    transform: scale(1.0); 
+    
+    object-position: 50% 50%; 
 }
 
-/* Optional: Avatar par hover karne se thoda pop-out effect aayega */
-.avatar-container-3d:hover .avatar {
-    transform: scale(1.05);
-}
-
-.gradient-text {
-    font-size: 3.5rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 0.5rem;
-    /* Subtle text shadow for depth */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-header h2 {
-    color: var(--text-muted);
-    font-weight: 400;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.bio {
-    max-width: 600px;
-    color: var(--text-muted);
-    font-size: 1.1rem;
+h2 {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
     margin-bottom: 2rem;
+    height: 30px; /* Prevents layout shift during typing */
 }
 
-/* 3D Social Buttons */
-.social-links-3d {
+/* --- 3D NEUMORPHIC BUTTONS --- */
+.social-links {
     display: flex;
-    gap: 20px;
-    margin-top: 1rem;
+    gap: 1.5rem;
 }
 
-.btn-3d {
+.neu-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 50px;
     height: 50px;
-    border-radius: 12px;
-    background: var(--bg-color);
+    border-radius: 50%;
     color: var(--gradient-start);
-    font-size: 1.5rem;
     text-decoration: none;
-    /* Physical button pop-out effect */
-    box-shadow: 6px 6px 12px var(--shadow-dark), 
-               -6px -6px 12px var(--shadow-light);
+    font-size: 1.2rem;
+    background: var(--bg-color);
+    box-shadow: 5px 5px 10px var(--shadow-dark), 
+               -5px -5px 10px var(--shadow-light);
     transition: all 0.2s ease-in-out;
 }
 
-.btn-3d:hover {
+.neu-btn:hover {
     color: var(--gradient-end);
-    transform: translateY(-2px);
+    box-shadow: inset 5px 5px 10px var(--shadow-dark), 
+                inset -5px -5px 10px var(--shadow-light);
 }
 
-.btn-3d:active {
-    /* Pressed physical button effect */
-    box-shadow: inset 6px 6px 12px var(--shadow-dark), 
-                inset -6px -6px 12px var(--shadow-light);
-    transform: translateY(2px);
+/* --- LAYOUT & CONTAINERS --- */
+.container {
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
 }
 
-/* Section Styling */
-section { margin-bottom: 4rem; }
-
-.section-title {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-    display: inline-block;
-    color: var(--text-main);
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
 }
 
-/* 3D Skills Pills */
+/* --- SKILLS PILLS --- */
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 1rem;
 }
 
-.skill-pill-3d {
+.skill-pill {
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
     background: var(--bg-color);
-    padding: 12px 24px;
-    border-radius: 30px;
-    font-weight: 600;
-    color: var(--text-muted);
-    box-shadow: 5px 5px 10px var(--shadow-dark), 
-               -5px -5px 10px var(--shadow-light);
-    transition: all 0.3s ease;
+    box-shadow: 4px 4px 8px var(--shadow-dark), 
+               -4px -4px 8px var(--shadow-light);
 }
 
-.skill-pill-3d:hover {
-    color: var(--text-main);
-    transform: scale(1.05);
-}
-
-/* 3D Project Cards */
-.projects-grid {
+/* --- PROJECT CARDS --- */
+.project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 35px;
-    perspective: 1000px; /* Required for 3D tilt */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
 }
 
-.project-card-3d {
+.neu-card {
+    padding: 1.5rem;
+    border-radius: 15px;
     background: var(--bg-color);
-    border-radius: 20px;
-    padding: 30px;
-    /* Thick 3D block shadow */
-    box-shadow: 10px 10px 20px var(--shadow-dark), 
-               -10px -10px 20px var(--shadow-light);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    transform-style: preserve-3d;
+    box-shadow: 6px 6px 12px var(--shadow-dark), 
+               -6px -6px 12px var(--shadow-light);
+    transition: transform 0.3s ease;
 }
 
-.project-card-3d:hover {
-    /* Tilts the card slightly on hover */
-    transform: translateY(-10px) rotateX(5deg) rotateY(-5deg);
-    box-shadow: 20px 20px 40px var(--shadow-dark), 
-               -5px -5px 15px var(--shadow-light);
+.neu-card:hover {
+    transform: translateY(-5px);
 }
 
-.project-card-3d h4 {
-    font-size: 1.4rem;
-    margin-bottom: 15px;
-    color: var(--text-main);
-    /* Moves the text "forward" in 3D space on hover */
-    transform: translateZ(20px);
-}
-
-.project-card-3d p {
-    color: var(--text-muted);
-    margin-bottom: 25px;
-    transform: translateZ(10px);
-}
-
-.tech-stack {
-    transform: translateZ(15px);
-}
-
-.tech-stack span {
-    font-size: 0.85rem;
+.neu-card h4 {
+    margin-bottom: 0.5rem;
     color: var(--gradient-start);
-    background: rgba(59, 130, 246, 0.1);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-weight: 600;
-    /* Inset shadow for pill depth */
-    box-shadow: inset 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-footer {
-    padding: 2rem 0;
-    color: var(--text-muted);
+.neu-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* --- NEW ANIMATIONS & INTERACTIVITY --- */
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gradient-start);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.1s, height 0.1s;
+    z-index: 9999;
+    box-shadow: 0 0 15px var(--gradient-start);
+}
+
+/* --- SCROLL PROGRESS BAR --- */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    width: 0%; /* JS will control this */
+    z-index: 10000;
+    box-shadow: 0 0 10px var(--gradient-start);
+    border-radius: 0 2px 2px 0;
+}
+
+/* --- UPGRADED 3D SCROLL REVEAL --- */
+.hidden {
+    opacity: 0;
+    /* Cards start pushed down, scaled down, and tilted slightly backwards */
+    transform: translateY(80px) scale(0.9) rotateX(-15deg);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0);
+}
+
+/* Staggered delay for cards side-by-side */
+.project-card:nth-child(2) { transition-delay: 0.15s; }
+.project-card:nth-child(3) { transition-delay: 0.3s; }
+
+/* 3D Tilt preparation for JS */
+.neu-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.typing-text::after {
+    content: '|';
+    color: var(--gradient-start);
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+/* --- FOOTER --- */
+.neu-footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 4rem;
+    color: var(--text-secondary);
+    /* Subtle glowing top border to separate it from the main content */
+    border-top: 1px solid var(--shadow-dark);
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* --- FOOTER --- */
+.neu-footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 4rem;
+    color: var(--text-secondary);
+    background: var(--bg-color);
+    
+    /* 1. Remove the harsh solid line */
+    border-top: none; 
+    
+    /* 2. Add a soft upward 3D shadow instead */
+    box-shadow: 0 -10px 25px var(--shadow-dark), 
+                0 -2px 5px var(--shadow-light);
+                
+    /* 3. Smooth the top edges to blend it naturally */
+    border-radius: 30px 30px 0 0;
+}
+
+.neu-footer p {
+    margin: 0.2rem 0;
+}
+
+.footer-subtext {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.footer-subtext {
+    font-size: 0.8rem;
+    opacity: 0.7;
 }
