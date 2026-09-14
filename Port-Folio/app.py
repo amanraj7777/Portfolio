@@ -10,7 +10,6 @@ def home():
         "bio": "I am a second-year BS Data Science and Applications student at IIT Madras with a strong focus on data analytics, backend development, and AI tools."
     }
     
-    # New social links dictionary
     socials = {
         "linkedin": "https://www.linkedin.com/in/aman-raj-158126342?utm_source=share_via&utm_content=profile&utm_medium=member_android",
         "instagram": "https://www.instagram.com/wu_kong._?stkn=ejg1djBpd21wMW1y",
@@ -34,6 +33,11 @@ def home():
             "title": "Student Placement Portal",
             "description": "A web platform designed to streamline the student placement process.",
             "tech": "Flask, SQLAlchemy, HTML, CSS"
+        },
+        {
+            "title": "Trekos",
+            "description": "A role-based adventure booking platform featuring dedicated portals for users, staff, and admins.",
+            "tech": "Flask, SQL"
         }
     ]
 
@@ -41,5 +45,3 @@ def home():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-   
